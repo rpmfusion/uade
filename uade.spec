@@ -1,6 +1,6 @@
 Name:           uade
 Version:        2.09
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Unix Amiga Delitracker Emulator
 Group:          Applications/Multimedia
 License:        GPLv2+ and Distributable
@@ -142,6 +142,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Sep 14 2008 Xavier Lamien <lxtnow[at]gmail.com> - 2.09-3
+- Update files and rebuild for rpmfusion.
+
 * Sun Mar 23 2008 Ian Chapman <packages[AT]amiga-hardware.com> 2.09-2
 - Rebuild against latest audacious to avoid undefined symbol: xmms_usleep
 - Convert UAE-README to UTF8
