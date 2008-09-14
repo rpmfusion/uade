@@ -73,7 +73,7 @@ Encode any music module format into an ogg, mp3, flac, cdr or wav file
 
 %prep
 %setup -q
-%patch -p1
+%patch0 -p1
 %patch1 -p1
 
 # Encoding fixes
