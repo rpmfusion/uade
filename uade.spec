@@ -1,6 +1,8 @@
+%define _default_patch_fuzz 2
+
 Name:           uade
 Version:        2.09
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Unix Amiga Delitracker Emulator
 Group:          Applications/Multimedia
 License:        GPLv2+ and Distributable
@@ -142,6 +144,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Oct 19 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 2.09-4
+- _default_patch_fuzz 2
+
 * Sun Sep 14 2008 Xavier Lamien <lxtnow[at]gmail.com> - 2.09-3
 - Update files and rebuild for rpmfusion.
 
