@@ -2,7 +2,7 @@
 
 Name:           uade
 Version:        2.09
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Unix Amiga Delitracker Emulator
 Group:          Applications/Multimedia
 License:        GPLv2+ and Distributable
@@ -144,6 +144,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Mar 29 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 2.09-5
+- rebuild for new F11 features
+
 * Sun Oct 19 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 2.09-4
 - _default_patch_fuzz 2
 
