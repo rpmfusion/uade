@@ -13,3 +13,4 @@ Preferences -> Audio -> Format Detection -> Detect file formats by extenstion
    system
 
 Preferences -> Audio -> Buffer size
+
