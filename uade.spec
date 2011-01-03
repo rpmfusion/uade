@@ -1,29 +1,34 @@
-%define _default_patch_fuzz 2
+#%%define _default_patch_fuzz 2
 
 Name:           uade
-Version:        2.09
-Release:        5%{?dist}
-Summary:        Unix Amiga Delitracker Emulator
+Version:        2.13
+Release:        2%{?dist}
+Summary:        Unix Amiga DeliTracker Emulator
 Group:          Applications/Multimedia
 License:        GPLv2+ and Distributable
 URL:            http://zakalwe.fi/uade
 Source0:        http://zakalwe.fi/%{name}/uade2/%{name}-%{version}.tar.bz2
 Source1:        README_%{name}.txt
-Patch0:         %{name}-2.08-usedestdir.patch
-Patch1:         %{name}-2.03-makenamesane.patch
+Patch0:         uade-2.13-makenamesane.patch
+Patch1:         uade-2.13-fixaudaciousplugin.patch
+Patch2:         uade-2.13-coreinstalldestdir.patch
+Patch3:         uade-2.13-uade123installdestdir.patch
+Patch4:         uade-2.13-xmmsinstalldestdir.patch
+Patch5:         uade-2.13-audaciousinstalldestdir.patch
+Patch6:         uade-2.13-uadefsinstalldestdir.patch
+Patch7:         uade-2.13-uadeinstalldestdir.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires:  audacious-devel
+BuildRequires:  fuse-devel
 BuildRequires:  libao-devel
 BuildRequires:  pkgconfig
 BuildRequires:  xmms-devel
 
-
 %description
 UADE plays old Amiga tunes through UAE emulation and a cloned m68k-assembler
 Eagleplayer API. The player infrastructure of UADE is built on the ground work
-of the Eagleplayer and Delitracker projects. UADE makes these external players
+of the Eagleplayer and DeliTracker projects. UADE makes these external players
 reusable on certain UNIX and other platforms. UADE contains a free
-(as in freedom) implementation of Eagleplayer and Delitracker API for UNIX
+(as in freedom) implementation of Eagleplayer and DeliTracker API for UNIX
 variants.
 
 
@@ -39,25 +44,14 @@ Development files for uade
 
 
 %package -n xmms-%{name}
-Summary:        Unix Amiga Delitracker Emulator XMMS plugin
+Summary:        Unix Amiga DeliTracker Emulator XMMS plug-in
 Group:          Applications/Multimedia
 Requires:       %{name} = %{version}-%{release}
 Requires:       xmms
 
 %description -n xmms-%{name}
-A plugin for XMMS that makes use of UADE to play various Amiga music module
+A plug-in for XMMS that makes use of UADE to play various Amiga music module
 formats using external players.
-
-
-%package -n audacious-plugins-%{name}
-Summary:        Unix Amiga Delitracker Emulator audacious plugin
-Group:          Applications/Multimedia
-Requires:       %{name} = %{version}-%{release}
-Requires:       audacious
-
-%description -n audacious-plugins-%{name}
-A plugin for audacious that makes use of UADE to play various Amiga music
-module formats using external players
 
 
 %package mod2ogg
@@ -73,10 +67,27 @@ Requires:       vorbis-tools
 Encode any music module format into an ogg, mp3, flac, cdr or wav file
 
 
+%package -n fuse-uadefs
+Summary:        Pseudo file system for playing music modules as WAVs
+Group:          System Environment/Base
+Requires:       %{name} = %{version}-%{release}
+Requires:       fuse
+
+%description -n fuse-uadefs
+Pseudo file system for playing music modules as WAVs. This allows audio players
+which do not support music modules, to play them.
+
+
 %prep
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
 
 # Encoding fixes
 iconv -f iso8859-1 ChangeLog -t utf8 > ChangeLog.conv \
@@ -85,16 +96,26 @@ iconv -f iso8859-1 ChangeLog -t utf8 > ChangeLog.conv \
 iconv -f iso8859-1 doc/UAE-README -t utf8 > UAE-README.conv \
     && mv -f UAE-README.conv doc/UAE-README
 
+# Some renaming to keep things standard
+sed -i 's|uade2\/|uade\/|g' doc/uade123.1
+sed -i 's|\.uade2\/|\.uade\/|g' src/frontends/xmms/plugin.c \
+    src/frontends/uadefs/uadefs.c src/frontends/uade123/uade123.c \
+    src/frontends/common/uadeconf.c src/frontends/common/uadeconf.c
+sed -i 's|\/\.uade2|\/\.uade|g' src/frontends/meta-input/uade123.sh
+
 
 %build
-%configure --with-uade123 --with-xmms --with-audacious --with-text-scope
+%configure --with-text-scope
 make %{?_smp_mflags}
 
 
 %install
 rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
-install -pm0644 %{SOURCE1} README.dribble
+install -pm0644 %{SOURCE1} README.rpmfusion
+
+# Permission fixes
+chmod 644 %{buildroot}%{_mandir}/man1/*
 
 # Place configs in a sane location and make symlinks
 mkdir -p %{buildroot}%{_sysconfdir}/%{name}
@@ -116,14 +137,16 @@ rm -rf %{buildroot}
 %{_libdir}/%{name}
 %{_mandir}/man1/uade123.1.gz
 %{_datadir}/%{name}
+%dir %{_sysconfdir}/%{name}
 %config(noreplace) %{_sysconfdir}/%{name}/eagleplayer.conf
 %config(noreplace) %{_sysconfdir}/%{name}/%{name}.conf
 %config(noreplace) %{_sysconfdir}/%{name}/uaerc
-%doc AUTHORS ChangeLog COPYING COPYING.GPL doc/BUGS doc/UAE-README
-%doc doc/UAE-CREDITS doc/PLANS amigasrc/README README.dribble
+%doc AUTHORS ChangeLog COPYING COPYING.GPL doc/UAE-README
+%doc doc/UAE-CREDITS doc/PLANS amigasrc/README
 
 
 %files mod2ogg
+%defattr(-,root,root,-)
 %{_bindir}/mod2ogg2.sh
 
 
@@ -138,12 +161,27 @@ rm -rf %{buildroot}
 %{_libdir}/xmms/Input/libuade2.so
 
 
-%files -n audacious-plugins-%{name}
+%files -n fuse-uadefs
 %defattr(-,root,root,-)
-%{_libdir}/audacious/Input/libuade2.so
+%{_bindir}/uadefs
+%{_mandir}/man1/uadefs.1.gz
 
 
 %changelog
+* Thu Sep 16 2010 Bernie Innocenti <bernie@codewiz.org> - 2.13-2
+- Disable audacious plugin
+
+* Sat Mar 13 2010 Ian Chapman <packages [AT] amiga-hardware [DOT] com> - 2.13-1
+- Upgraded to 2.13
+- Removed some redundant options to %%configure
+- Added fuse-devel BR for uadefs
+- Updated all patches
+- Added missing %%defattr(-,root,root,-) to mod2ogg files section
+- Removed some obsolete documentation
+- Own /etc/uade
+- Added uadefs sub-package, a pseudo file system for representing the modules
+  as WAV files
+
 * Sun Mar 29 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 2.09-5
 - rebuild for new F11 features
 

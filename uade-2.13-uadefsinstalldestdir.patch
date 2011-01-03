@@ -1,0 +1,15 @@
+--- uade-2.13/src/frontends/uadefs/Makefile.in.orig	2009-10-30 05:01:12.000000000 +0800
++++ uade-2.13/src/frontends/uadefs/Makefile.in	2010-03-01 22:19:00.553753871 +0800
+@@ -21,9 +21,9 @@
+ uadefs.o:	uadefs.c
+ 
+ install:	uadefs
+-	mkdir -p "$(BINDIR)" "$(MANDIR)"
+-	install uadefs "$(BINDIR)"/
+-	install uadefs.1 "$(MANDIR)"/
++	mkdir -p "$(DESTDIR)$(BINDIR)" "$(DESTDIR)$(MANDIR)/man1"
++	install uadefs "$(DESTDIR)$(BINDIR)"/
++	install uadefs.1 "$(DESTDIR)$(MANDIR)/man1"/
+ 
+ clean:	
+ 	rm -f uadefs *.o

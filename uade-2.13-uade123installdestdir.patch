@@ -1,0 +1,16 @@
+--- uade-2.13/src/frontends/uade123/Makefile.in.orig	2009-10-30 05:01:12.000000000 +0800
++++ uade-2.13/src/frontends/uade123/Makefile.in	2010-03-01 22:08:32.925768346 +0800
+@@ -19,10 +19,9 @@
+ 	rm -f uade123 *.o
+ 
+ install:	uade123
+-	mkdir -p "$(BINDIR)"
+-	rm -f "$(BINDIR)/$(UADE123NAME)"
+-	cp -f "$(UADE123NAME)" "$(BINDIR)/" || true
+-	chmod og+rx "$(BINDIR)/$(UADE123NAME)"
++	mkdir -p "$(DESTDIR)$(BINDIR)"
++	cp -f "$(UADE123NAME)" "$(DESTDIR)$(BINDIR)/" || true
++	chmod og+rx "$(DESTDIR)$(BINDIR)/$(UADE123NAME)"
+ 
+ uninstall:	
+ 	rm -f "$(BINDIR)/$(UADE123NAME)"

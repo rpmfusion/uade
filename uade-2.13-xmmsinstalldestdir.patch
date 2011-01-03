@@ -1,0 +1,15 @@
+--- uade-2.13/src/frontends/xmms/Makefile.in.orig	2009-10-30 05:01:12.000000000 +0800
++++ uade-2.13/src/frontends/xmms/Makefile.in	2010-03-01 22:12:15.932761082 +0800
+@@ -22,9 +22,9 @@
+ 	$(OBJCOPY) -G get_iplugin_info $@
+ 
+ install:	libuade2.so
+-	mkdir -p "$(XMMSPLUGINDIR)" "$(BINDIR)"
+-	install libuade2.so "$(XMMSPLUGINDIR)"
+-	install uadexmmsadd "$(BINDIR)"/
++	mkdir -p "$(DESTDIR)$(XMMSPLUGINDIR)" "$(DESTDIR)$(BINDIR)"
++	install libuade2.so "$(DESTDIR)$(XMMSPLUGINDIR)"
++	install uadexmmsadd "$(DESTDIR)$(BINDIR)"/
+ 
+ fileinfo.o:	fileinfo.c fileinfo.h
+ 	$(CC) $(CFLAGS) -c $<

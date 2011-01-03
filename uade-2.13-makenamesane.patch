@@ -1,6 +1,6 @@
---- uade-2.03/configure.orig	2006-08-27 10:56:14.000000000 +0100
-+++ uade-2.03/configure	2006-09-07 02:34:25.000000000 +0100
-@@ -309,8 +309,8 @@
+--- uade-2.13/configure.orig	2009-10-30 05:01:12.000000000 +0800
++++ uade-2.13/configure	2010-02-28 22:04:16.862625017 +0800
+@@ -342,8 +342,8 @@
      if test -z "$prefix"; then
  	prefix="/usr/local"
      fi
@@ -11,7 +11,7 @@
      if test -z "$bindir"; then
  	bindir="$prefix/bin"
      fi
-@@ -329,7 +329,7 @@
+@@ -363,7 +363,7 @@
  else
      # user installation
      if test -z "$prefix"; then
@@ -20,12 +20,12 @@
      fi
      uadedatadir="$prefix"
      uadelibdir="$prefix"
-@@ -391,7 +391,7 @@
-     AOLIBS="`$PKG_CONFIG --libs ao`"
+@@ -439,7 +439,7 @@
+     fi
  fi
  
 -pkgconfigdir="$prefix/lib/pkgconfig"
 +pkgconfigdir="$libdir/pkgconfig"
  rm -f uade.pc
- if test "$PKG_CONFIG" != "" ; then
+ if test -n "$PKG_CONFIG" ; then
      installuadepcrule=""

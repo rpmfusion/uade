@@ -1,0 +1,13 @@
+--- uade-2.13/src/frontends/audacious/Makefile.in.orig	2009-10-30 05:01:12.000000000 +0800
++++ uade-2.13/src/frontends/audacious/Makefile.in	2010-03-01 22:14:29.841634777 +0800
+@@ -30,8 +30,8 @@
+ 	$(CC) $(CFLAGS) -c $<
+ 
+ install:	
+-	mkdir -p "$(AUDACIOUSPLUGINDIR)"
+-	install libuade2.so "$(AUDACIOUSPLUGINDIR)"
++	mkdir -p "$(DESTDIR)$(AUDACIOUSPLUGINDIR)"
++	install libuade2.so "$(DESTDIR)$(AUDACIOUSPLUGINDIR)"
+ 
+ clean:	
+ 	rm -f *.so *.o
