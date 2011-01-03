@@ -1,0 +1,31 @@
+--- uade-2.13/configure.orig	2009-10-30 05:01:12.000000000 +0800
++++ uade-2.13/configure	2010-02-28 22:04:16.862625017 +0800
+@@ -342,8 +342,8 @@
+     if test -z "$prefix"; then
+ 	prefix="/usr/local"
+     fi
+-    uadedatadir="$prefix/share/uade2"
+-    uadelibdir="$prefix/lib/uade2"
++    uadedatadir="$prefix/share/uade"
++    uadelibdir="$libdir/uade"
+     if test -z "$bindir"; then
+ 	bindir="$prefix/bin"
+     fi
+@@ -363,7 +363,7 @@
+ else
+     # user installation
+     if test -z "$prefix"; then
+-	prefix="$HOME/.uade2"
++	prefix="$HOME/.uade"
+     fi
+     uadedatadir="$prefix"
+     uadelibdir="$prefix"
+@@ -439,7 +439,7 @@
+     fi
+ fi
+ 
+-pkgconfigdir="$prefix/lib/pkgconfig"
++pkgconfigdir="$libdir/pkgconfig"
+ rm -f uade.pc
+ if test -n "$PKG_CONFIG" ; then
+     installuadepcrule=""

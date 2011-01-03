@@ -1,0 +1,11 @@
+--- uade-2.13/src/frontends/audacious/plugin.c.orig	2009-10-30 05:01:12.000000000 +0800
++++ uade-2.13/src/frontends/audacious/plugin.c	2010-02-28 21:55:09.213624977 +0800
+@@ -85,7 +85,7 @@
+   .seek = uade_seek,
+   .get_time = uade_get_time,
+   .cleanup = uade_cleanup,
+-  .get_song_info = uade_get_song_info,
++  /*.get_song_info = uade_get_song_info,*/
+   .file_info_box = uade_file_info,
+ };
+ 
