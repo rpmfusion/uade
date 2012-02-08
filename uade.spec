@@ -2,7 +2,7 @@
 
 Name:           uade
 Version:        2.13
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Unix Amiga DeliTracker Emulator
 Group:          Applications/Multimedia
 License:        GPLv2+ and Distributable
@@ -168,6 +168,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Feb 09 2012 Nicolas Chauvet <kwizart@gmail.com> - 2.13-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
+
 * Thu Sep 16 2010 Bernie Innocenti <bernie@codewiz.org> - 2.13-2
 - Disable audacious plugin
 
