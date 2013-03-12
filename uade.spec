@@ -2,7 +2,7 @@
 
 Name:           uade
 Version:        2.13
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Unix Amiga DeliTracker Emulator
 Group:          Applications/Multimedia
 License:        GPLv2+ and Distributable
@@ -168,6 +168,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Mar 12 2013 Nicolas Chauvet <kwizart@gmail.com> - 2.13-4
+- https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
+
 * Thu Feb 09 2012 Nicolas Chauvet <kwizart@gmail.com> - 2.13-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
 
