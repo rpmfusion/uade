@@ -1,0 +1,20 @@
+Fedora package already send common optimization flags.
+--- ./src/Makefile.in.orig	2016-02-22 20:42:07.005508433 +0000
++++ ./src/Makefile.in	2016-02-22 20:43:03.433158259 +0000
+@@ -8,14 +8,12 @@ ARCHFLAGS = {ARCHFLAGS}
+ ARCHLIBS = {ARCHLIBS}
+ DEBUGFLAGS = {DEBUGFLAGS}
+ 
+-COMMONGCCOPTS = -Wall -Wno-unused -Wno-format -Wmissing-prototypes -Wstrict-prototypes -fno-exceptions -O2
+-
+-TARGETCFLAGS = -fomit-frame-pointer $(COMMONGCCOPTS) $(DEBUGFLAGS) $(ARCHFLAGS)
++TARGETCFLAGS = -fomit-frame-pointer $(DEBUGFLAGS) $(ARCHFLAGS)
+ LIBRARIES = -lm $(AUDIOLIBS) $(ARCHLIBS)
+ 
+ # Native flags are used to build tools that generate new code that is then
+ # compiled with the target compiler.
+-NATIVECFLAGS = $(COMMONGCCOPTS) $(DEBUGFLAGS)
++NATIVECFLAGS = $(DEBUGFLAGS)
+ 
+ .SUFFIXES: .a .o .c .h .S
+ 

@@ -2,7 +2,7 @@
 
 Name:           uade
 Version:        2.13
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Unix Amiga DeliTracker Emulator
 Group:          Applications/Multimedia
 License:        GPLv2+ and Distributable
@@ -17,7 +17,7 @@ Patch4:         uade-2.13-xmmsinstalldestdir.patch
 Patch5:         uade-2.13-audaciousinstalldestdir.patch
 Patch6:         uade-2.13-uadefsinstalldestdir.patch
 Patch7:         uade-2.13-uadeinstalldestdir.patch
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Patch8:         uade-2.13-COMMONGCCOPTS.patch
 BuildRequires:  fuse-devel
 BuildRequires:  libao-devel
 BuildRequires:  pkgconfig
@@ -88,6 +88,7 @@ which do not support music modules, to play them.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
 
 # Encoding fixes
 iconv -f iso8859-1 ChangeLog -t utf8 > ChangeLog.conv \
@@ -127,12 +128,7 @@ ln -s ../../../etc/%{name}/uade.conf %{buildroot}%{_datadir}/%{name}
 ln -s ../../../etc/%{name}/uaerc %{buildroot}%{_datadir}/%{name}
 
 
-%clean
-rm -rf %{buildroot}
-
-
 %files
-%defattr(-,root,root,-)
 %{_bindir}/uade123
 %{_libdir}/%{name}
 %{_mandir}/man1/uade123.1.gz
@@ -141,33 +137,36 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/%{name}/eagleplayer.conf
 %config(noreplace) %{_sysconfdir}/%{name}/%{name}.conf
 %config(noreplace) %{_sysconfdir}/%{name}/uaerc
-%doc AUTHORS ChangeLog COPYING COPYING.GPL doc/UAE-README
+%doc AUTHORS ChangeLog doc/UAE-README
 %doc doc/UAE-CREDITS doc/PLANS amigasrc/README
+%license COPYING COPYING.GPL
 
 
 %files mod2ogg
-%defattr(-,root,root,-)
 %{_bindir}/mod2ogg2.sh
 
 
 %files devel
-%defattr(-,root,root,-)
 %{_libdir}/pkgconfig/%{name}.pc
 
 
 %files -n xmms-%{name}
-%defattr(-,root,root,-)
 %{_bindir}/uadexmmsadd
 %{_libdir}/xmms/Input/libuade2.so
 
 
 %files -n fuse-uadefs
-%defattr(-,root,root,-)
 %{_bindir}/uadefs
 %{_mandir}/man1/uadefs.1.gz
 
 
 %changelog
+* Mon Feb 22 2016 Sérgio Basto <sergio@serjux.com> - 2.13-6
+- Fix FTBFS (rfbz#3800), with patch8, Fedora package already send common
+  optimization flags.
+- Add license tag.
+- Trivial spec cleanups.
+
 * Sun Aug 31 2014 Sérgio Basto <sergio@serjux.com> - 2.13-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
@@ -221,7 +220,7 @@ rm -rf %{buildroot}
 * Thu Apr 26 2007 Ian Chapman <packages[AT]amiga-hardware.com> 2.06-1
 - Upgrade to 2.06
 
-* Thu Feb 13 2007 Ian Chapman <packages[AT]amiga-hardware.com> 2.05-1
+* Tue Feb 13 2007 Ian Chapman <packages[AT]amiga-hardware.com> 2.05-1
 - Upgrade to 2.05
 
 * Thu Jan 25 2007 Ian Chapman <packages[AT]amiga-hardware.com> 2.04-1
