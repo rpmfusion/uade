@@ -2,7 +2,7 @@
 
 Name:           uade
 Version:        2.13
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        Unix Amiga DeliTracker Emulator
 Group:          Applications/Multimedia
 License:        GPLv2+ and Distributable
@@ -161,6 +161,9 @@ ln -s ../../../etc/%{name}/uaerc %{buildroot}%{_datadir}/%{name}
 
 
 %changelog
+* Sun Mar 26 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 2.13-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Mon Feb 22 2016 Sérgio Basto <sergio@serjux.com> - 2.13-6
 - Fix FTBFS (rfbz#3800), with patch8, Fedora package already send common
   optimization flags.
