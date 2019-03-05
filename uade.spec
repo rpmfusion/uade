@@ -18,6 +18,7 @@ Patch5:         uade-2.13-audaciousinstalldestdir.patch
 Patch6:         uade-2.13-uadefsinstalldestdir.patch
 Patch7:         uade-2.13-uadeinstalldestdir.patch
 Patch8:         uade-2.13-COMMONGCCOPTS.patch
+BuildRequires:  gcc
 BuildRequires:  fuse-devel
 BuildRequires:  libao-devel
 BuildRequires:  pkgconfig
