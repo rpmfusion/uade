@@ -2,7 +2,7 @@
 
 Name:           uade
 Version:        2.13
-Release:        15%{?dist}
+Release:        16%{?dist}
 Summary:        Unix Amiga DeliTracker Emulator
 Group:          Applications/Multimedia
 License:        GPLv2+ and Distributable
@@ -162,6 +162,9 @@ ln -s ../../../etc/%{name}/uaerc %{buildroot}%{_datadir}/%{name}
 
 
 %changelog
+* Thu Feb 04 2021 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.13-16
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+
 * Wed Aug 19 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.13-15
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
