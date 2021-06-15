@@ -2,9 +2,8 @@
 
 Name:           uade
 Version:        2.13
-Release:        16%{?dist}
+Release:        17%{?dist}
 Summary:        Unix Amiga DeliTracker Emulator
-Group:          Applications/Multimedia
 License:        GPLv2+ and Distributable
 URL:            http://zakalwe.fi/uade
 Source0:        http://zakalwe.fi/%{name}/uade2/%{name}-%{version}.tar.bz2
@@ -18,11 +17,14 @@ Patch5:         uade-2.13-audaciousinstalldestdir.patch
 Patch6:         uade-2.13-uadefsinstalldestdir.patch
 Patch7:         uade-2.13-uadeinstalldestdir.patch
 Patch8:         uade-2.13-COMMONGCCOPTS.patch
+
 BuildRequires:  gcc
 BuildRequires:  fuse-devel
 BuildRequires:  libao-devel
 BuildRequires:  pkgconfig
+%if 0%{?fedora} < 35
 BuildRequires:  xmms-devel
+%endif
 
 %description
 UADE plays old Amiga tunes through UAE emulation and a cloned m68k-assembler
@@ -35,30 +37,27 @@ variants.
 
 %package devel
 Summary:        Development files for uade
-Group:          Applications/Multimedia
-Requires:       %{name} = %{version}-%{release}
+Requires:       %{name}%{_isa} = %{version}-%{release}
 Requires:       pkgconfig
 Requires:       libao-devel
 
 %description devel
 Development files for uade
 
-
+%if 0%{?fedora} < 35
 %package -n xmms-%{name}
 Summary:        Unix Amiga DeliTracker Emulator XMMS plug-in
-Group:          Applications/Multimedia
-Requires:       %{name} = %{version}-%{release}
+Requires:       %{name}%{_isa} = %{version}-%{release}
 Requires:       xmms
 
 %description -n xmms-%{name}
 A plug-in for XMMS that makes use of UADE to play various Amiga music module
 formats using external players.
-
+%endif
 
 %package mod2ogg
 Summary:        Encode music modules to ogg/mp3/flac etc
-Group:          Applications/Multimedia
-Requires:       %{name} = %{version}-%{release}
+Requires:       %{name}%{_isa} = %{version}-%{release}
 Requires:       flac
 Requires:       lame
 Requires:       sox
@@ -70,8 +69,7 @@ Encode any music module format into an ogg, mp3, flac, cdr or wav file
 
 %package -n fuse-uadefs
 Summary:        Pseudo file system for playing music modules as WAVs
-Group:          System Environment/Base
-Requires:       %{name} = %{version}-%{release}
+Requires:       %{name}%{_isa} = %{version}-%{release}
 Requires:       fuse
 
 %description -n fuse-uadefs
@@ -108,12 +106,11 @@ sed -i 's|\/\.uade2|\/\.uade|g' src/frontends/meta-input/uade123.sh
 
 %build
 %configure --with-text-scope
-make %{?_smp_mflags}
+%make_build
 
 
 %install
-rm -rf %{buildroot}
-make install DESTDIR=%{buildroot}
+%make_install
 install -pm0644 %{SOURCE1} README.rpmfusion
 
 # Permission fixes
@@ -150,11 +147,11 @@ ln -s ../../../etc/%{name}/uaerc %{buildroot}%{_datadir}/%{name}
 %files devel
 %{_libdir}/pkgconfig/%{name}.pc
 
-
+%if 0%{?fedora} < 35
 %files -n xmms-%{name}
 %{_bindir}/uadexmmsadd
 %{_libdir}/xmms/Input/libuade2.so
-
+%endif
 
 %files -n fuse-uadefs
 %{_bindir}/uadefs
@@ -162,8 +159,11 @@ ln -s ../../../etc/%{name}/uaerc %{buildroot}%{_datadir}/%{name}
 
 
 %changelog
+* Tue Jun 15 2021 Leigh Scott <leigh123linux@gmail.com> - 2.13-17
+- xmms is retired for f35
+
 * Thu Feb 04 2021 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.13-16
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 
 * Wed Aug 19 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.13-15
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
