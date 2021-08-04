@@ -2,7 +2,7 @@
 
 Name:           uade
 Version:        2.13
-Release:        17%{?dist}
+Release:        18%{?dist}
 Summary:        Unix Amiga DeliTracker Emulator
 License:        GPLv2+ and Distributable
 URL:            http://zakalwe.fi/uade
@@ -159,6 +159,9 @@ ln -s ../../../etc/%{name}/uaerc %{buildroot}%{_datadir}/%{name}
 
 
 %changelog
+* Wed Aug 04 2021 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.13-18
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
+
 * Tue Jun 15 2021 Leigh Scott <leigh123linux@gmail.com> - 2.13-17
 - xmms is retired for f35
 
