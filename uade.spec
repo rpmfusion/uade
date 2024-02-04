@@ -2,7 +2,7 @@
 
 Name:           uade
 Version:        2.13
-Release:        21%{?dist}
+Release:        22%{?dist}
 Summary:        Unix Amiga DeliTracker Emulator
 License:        GPLv2+ and Distributable
 URL:            http://zakalwe.fi/uade
@@ -159,6 +159,9 @@ ln -s ../../../etc/%{name}/uaerc %{buildroot}%{_datadir}/%{name}
 
 
 %changelog
+* Sun Feb 04 2024 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 2.13-22
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_40_Mass_Rebuild
+
 * Thu Aug 03 2023 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 2.13-21
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_39_Mass_Rebuild
 
